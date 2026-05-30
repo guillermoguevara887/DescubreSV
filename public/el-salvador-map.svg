@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 320" fill="none">
+  <defs>
+    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBEAFE;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E0F2FE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CCFBF1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1E3A8A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- El Salvador silhouette — approximate geographic outline -->
+  <!-- ViewBox 560x320, country spans x:30-530, y:32-295 -->
+  <!-- Northern border with Honduras slopes down-right; Pacific coast in the south -->
+  <path
+    d="
+      M 56 34
+      C 100 28 145 26 190 30
+      C 235 34 275 44 318 58
+      C 358 70 395 88 428 106
+      C 448 118 462 128 472 140
+      L 480 158
+      L 484 178
+      C 480 192 472 202 460 210
+      C 450 218 445 228 450 240
+      C 455 250 452 260 444 268
+      C 432 278 416 282 396 284
+      C 368 288 340 290 312 290
+      C 278 290 244 288 212 283
+      C 180 278 150 270 122 260
+      C 96 250 74 236 56 220
+      C 42 208 36 195 36 180
+      C 36 164 40 148 44 132
+      C 48 116 50 98 52 80
+      C 54 62 54 48 56 34
+      Z
+    "
+    fill="url(#mapGrad)"
+    stroke="#93C5FD"
+    stroke-width="1.5"
+    filter="url(#mapShadow)"
+  />
+
+  <!-- Department boundaries — subtle internal lines for visual richness -->
+  <g stroke="#BFDBFE" stroke-width="0.6" stroke-dasharray="3,3" opacity="0.6">
+    <!-- Rough internal divisions (not precise, decorative) -->
+    <line x1="160" y1="34" x2="150" y2="268"/>
+    <line x1="270" y1="38" x2="258" y2="280"/>
+    <line x1="375" y1="62" x2="358" y2="285"/>
+    <line x1="56" y1="130" x2="472" y2="130"/>
+    <line x1="56" y1="200" x2="444" y2="264"/>
+  </g>
+
+  <!-- Subtle ocean texture hint around the coast -->
+  <path
+    d="M 36 180 C 36 195 42 208 56 220 C 74 236 96 250 122 260"
+    stroke="#7DD3FC"
+    stroke-width="2"
+    stroke-dasharray="4,4"
+    opacity="0.4"
+    fill="none"
+  />
+</svg>
