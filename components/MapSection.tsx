@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const mapPoints = [
   {
@@ -97,8 +98,6 @@ const legend = [
   { color: "bg-yellow-400", label: "Guías locales" },
 ];
 
-type Point = typeof mapPoints[number];
-
 export default function MapSection() {
   const [hovered, setHovered] = useState<number | null>(null);
 
@@ -122,84 +121,49 @@ export default function MapSection() {
 
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Map container */}
-          <div className="flex-1 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gradient-to-br from-blue-50 via-sky-50 to-teal-50">
-            {/* Map with SVG + markers */}
-            <div className="relative w-full" style={{ paddingBottom: "57.14%" /* 320/560 */ }}>
-              <div className="absolute inset-0 p-6">
-                {/* El Salvador SVG map */}
-                <svg
-                  viewBox="0 0 560 320"
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                >
-                  <defs>
-                    <linearGradient id="mapGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: "#BFDBFE", stopOpacity: 1 }} />
-                      <stop offset="50%" style={{ stopColor: "#BAE6FD", stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: "#99F6E4", stopOpacity: 1 }} />
-                    </linearGradient>
-                    <filter id="shadow2">
-                      <feDropShadow dx="0" dy="4" stdDeviation="10" floodColor="#1E3A8A" floodOpacity="0.1"/>
-                    </filter>
-                  </defs>
+          <div className="flex-1 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50">
+            {/* Image + markers wrapper — keeps aspect ratio of the image */}
+            <div className="relative w-full">
+              <Image
+                src="/mapa.png"
+                alt="Mapa de El Salvador"
+                width={1200}
+                height={800}
+                className="w-full h-auto block"
+                priority
+              />
 
-                  {/* Country silhouette */}
-                  <path
-                    d="M 56 34 C 100 28 145 26 190 30 C 235 34 275 44 318 58 C 358 70 395 88 428 106 C 448 118 462 128 472 140 L 480 158 L 484 178 C 480 192 472 202 460 210 C 450 218 445 228 450 240 C 455 250 452 260 444 268 C 432 278 416 282 396 284 C 368 288 340 290 312 290 C 278 290 244 288 212 283 C 180 278 150 270 122 260 C 96 250 74 236 56 220 C 42 208 36 195 36 180 C 36 164 40 148 44 132 C 48 116 50 98 52 80 C 54 62 54 48 56 34 Z"
-                    fill="url(#mapGrad2)"
-                    stroke="#93C5FD"
-                    strokeWidth="2"
-                    filter="url(#shadow2)"
+              {/* Interactive markers — positioned as % over the image */}
+              {mapPoints.map((point) => (
+                <div
+                  key={point.id}
+                  className="absolute group cursor-pointer z-10"
+                  style={{ left: point.x, top: point.y, transform: "translate(-50%, -50%)" }}
+                  onMouseEnter={() => setHovered(point.id)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {/* Pulse ring */}
+                  <div
+                    className={`absolute rounded-full ${point.color} opacity-30 animate-ping`}
+                    style={{ width: 28, height: 28, top: -6, left: -6 }}
+                  />
+                  {/* Dot */}
+                  <div
+                    className={`w-5 h-5 rounded-full ${point.color} border-2 border-white shadow-lg relative z-10 transition-transform duration-150 ${hovered === point.id ? "scale-150" : "scale-100"}`}
                   />
 
-                  {/* Internal department lines — decorative */}
-                  <g stroke="#BFDBFE" strokeWidth="0.8" strokeDasharray="4,4" opacity="0.5">
-                    <line x1="155" y1="32" x2="148" y2="272"/>
-                    <line x1="268" y1="36" x2="255" y2="284"/>
-                    <line x1="375" y1="60" x2="362" y2="284"/>
-                    <line x1="36" y1="140" x2="480" y2="140"/>
-                    <line x1="36" y1="210" x2="452" y2="262"/>
-                  </g>
-
-                  {/* Country label */}
-                  <text x="240" y="165" textAnchor="middle" fill="#1E3A8A" fillOpacity="0.12" fontSize="32" fontWeight="900" fontFamily="system-ui">
-                    EL SALVADOR
-                  </text>
-                </svg>
-
-                {/* Interactive markers — overlaid using absolute %, matching SVG proportions */}
-                {mapPoints.map((point) => (
-                  <div
-                    key={point.id}
-                    className="absolute group cursor-pointer z-10"
-                    style={{ left: point.x, top: point.y, transform: "translate(-50%, -50%)" }}
-                    onMouseEnter={() => setHovered(point.id)}
-                    onMouseLeave={() => setHovered(null)}
-                  >
-                    {/* Pulse ring */}
-                    <div
-                      className={`absolute rounded-full ${point.color} opacity-25 animate-ping`}
-                      style={{ width: 28, height: 28, top: -6, left: -6 }}
-                    />
-                    {/* Dot */}
-                    <div
-                      className={`w-5 h-5 rounded-full ${point.color} border-2 border-white shadow-lg relative z-10 transition-transform duration-150 ${hovered === point.id ? "scale-150" : "scale-100"}`}
-                    />
-
-                    {/* Emoji label on hover */}
-                    {hovered === point.id && (
-                      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 pointer-events-none z-20 animate-in fade-in duration-150">
-                        <div className="bg-gray-900 text-white text-xs rounded-xl px-3 py-1.5 whitespace-nowrap shadow-2xl">
-                          <span className="mr-1">{point.emoji}</span>
-                          <span className="font-semibold">{point.label}</span>
-                        </div>
-                        <div className="w-2 h-2 bg-gray-900 rotate-45 mx-auto -mt-1" />
+                  {/* Tooltip on hover */}
+                  {hovered === point.id && (
+                    <div className="absolute bottom-7 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+                      <div className="bg-gray-900 text-white text-xs rounded-xl px-3 py-1.5 whitespace-nowrap shadow-2xl">
+                        <span className="mr-1">{point.emoji}</span>
+                        <span className="font-semibold">{point.label}</span>
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                      <div className="w-2 h-2 bg-gray-900 rotate-45 mx-auto -mt-1" />
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Legend bar */}
