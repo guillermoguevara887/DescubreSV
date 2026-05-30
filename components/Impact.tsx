@@ -58,33 +58,33 @@ const chain = [
 
 export default function Impact() {
   return (
-    <section className="py-24 bg-gray-950 text-white" id="impacto">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+    <section className="py-16 md:py-24 bg-gray-950 text-white" id="impacto">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10 md:mb-16">
           <span className="inline-block bg-white/10 border border-white/20 font-semibold text-sm px-4 py-2 rounded-full mb-4">
             Impacto sistémico
           </span>
-          <h2 className="text-4xl md:text-5xl font-black mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4">
             Un turista activa{" "}
             <span style={{ color: "#F59E0B" }}>todo el ecosistema</span>
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto">
             Cuando un turista llega a través de DescubreSV, crea valor en cadena para todos los actores del país.
           </p>
         </div>
 
         {/* Chain — desktop horizontal, mobile vertical */}
-        <div className="flex flex-col lg:flex-row items-stretch gap-0 mb-16">
+        <div className="flex flex-col lg:flex-row items-stretch gap-3 lg:gap-0 mb-10 md:mb-16">
           {chain.map((node, i) => (
             <div key={node.actor} className="flex flex-col lg:flex-row items-center flex-1 min-w-0">
               {/* Node card */}
               <div className="flex-1 w-full min-w-0">
-                <div className={`bg-gradient-to-br ${node.color} rounded-2xl p-5 text-white shadow-lg h-full flex flex-col`}>
-                  <div className="text-4xl mb-3">{node.emoji}</div>
-                  <h3 className="font-black text-lg leading-tight">{node.actor}</h3>
-                  <p className="text-white/70 text-sm mb-4 flex-1">{node.role}</p>
-                  <div className="bg-white/15 rounded-xl p-3 mt-auto">
-                    <div className="text-2xl font-black">{node.metric}</div>
+                <div className={`bg-gradient-to-br ${node.color} rounded-2xl p-4 md:p-5 text-white shadow-lg h-full flex flex-col`}>
+                  <div className="text-3xl md:text-4xl mb-2 md:mb-3">{node.emoji}</div>
+                  <h3 className="font-black text-base md:text-lg leading-tight">{node.actor}</h3>
+                  <p className="text-white/70 text-xs md:text-sm mb-3 md:mb-4 flex-1">{node.role}</p>
+                  <div className="bg-white/15 rounded-xl p-2.5 md:p-3 mt-auto">
+                    <div className="text-xl md:text-2xl font-black">{node.metric}</div>
                     <div className="text-white/60 text-xs mt-0.5 leading-tight">{node.metricLabel}</div>
                   </div>
                 </div>
@@ -92,9 +92,8 @@ export default function Impact() {
 
               {/* Arrow between nodes */}
               {i < chain.length - 1 && (
-                <div className="flex items-center justify-center w-8 h-8 lg:w-10 lg:h-auto flex-shrink-0 my-2 lg:my-0">
-                  {/* Down on mobile, right on desktop */}
-                  <svg className="w-5 h-5 text-white/30 rotate-90 lg:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="hidden lg:flex items-center justify-center w-8 flex-shrink-0">
+                  <svg className="w-5 h-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>

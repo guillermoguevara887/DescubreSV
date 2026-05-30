@@ -77,7 +77,7 @@ export default function Hero() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-6 tracking-tight">
               Descubre el
               <br />
               <span className="relative inline-block">

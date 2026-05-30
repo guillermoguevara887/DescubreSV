@@ -151,6 +151,7 @@ export default function MapSection() {
                     style={{ left: point.x, top: point.y, transform: "translate(-50%, -50%)" }}
                     onMouseEnter={() => setHovered(point.id)}
                     onMouseLeave={() => setHovered(null)}
+                    onClick={() => setHovered(hovered === point.id ? null : point.id)}
                   >
                     {/* Pulse ring */}
                     <div
@@ -183,22 +184,22 @@ export default function MapSection() {
 
                     {/* Tooltip */}
                     {isHovered && (
-                      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 pointer-events-none w-48">
-                        <div className="bg-gray-900 text-white rounded-2xl px-4 py-3 shadow-2xl">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-lg">{point.emoji}</span>
-                            <span className="font-bold text-sm leading-tight">{point.label}</span>
+                      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 pointer-events-none w-40 sm:w-48">
+                        <div className="bg-gray-900 text-white rounded-xl px-3 py-2.5 shadow-2xl">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-base">{point.emoji}</span>
+                            <span className="font-bold text-xs leading-tight">{point.label}</span>
                           </div>
                           <span
-                            className="inline-block text-xs font-bold px-2 py-0.5 rounded-full mb-2"
+                            className="inline-block text-xs font-bold px-2 py-0.5 rounded-full mb-1.5"
                             style={{ background: cat.bg, color: "white" }}
                           >
                             {cat.label}
                           </span>
-                          <p className="text-white/60 text-xs leading-snug">{point.desc}</p>
+                          <p className="text-white/60 text-xs leading-snug hidden sm:block">{point.desc}</p>
                         </div>
                         <div
-                          className="w-3 h-3 mx-auto rotate-45 -mt-1.5"
+                          className="w-2.5 h-2.5 mx-auto rotate-45 -mt-1.5"
                           style={{ background: "#111827" }}
                         />
                       </div>
