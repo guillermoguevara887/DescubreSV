@@ -17,7 +17,7 @@ export default function Closing() {
           <br />
           <span className="text-brand-warm">El Salvador</span>,
           <br />
-          todos ganan.
+          todos ganamos.
         </h2>
 
         <p className="text-white/60 text-xl max-w-2xl mx-auto mb-12 leading-relaxed">

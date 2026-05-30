@@ -125,7 +125,7 @@ export default function Story() {
           </div>
 
           <p className="text-white/40 text-sm mt-8">
-            Cuando un turista descubre El Salvador — <strong className="text-white/70">todos ganan.</strong>
+            Cuando un turista descubre El Salvador — <strong className="text-white/70">todos ganamos.</strong>
           </p>
         </div>
       </div>
